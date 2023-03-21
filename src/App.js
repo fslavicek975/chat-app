@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Pages } from "./pages/Pages";
+import ThemeContext from "./ThemeContext/ThemeContext";
 
 function App() {
+  const [theme, setTheme] = useState("White");
+
+  const handleThemeChange = () => {
+    if (theme === "LightYellow") {
+      setTheme("White");
+      document.body.style.backgroundColor = "White";
+    } else {
+      setTheme("LightYellow");
+      document.body.style.backgroundColor = "LightYellow";
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{ theme, handleThemeChange }}>
+      <Pages />
+    </ThemeContext.Provider>
   );
 }
 
